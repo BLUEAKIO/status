@@ -23,7 +23,7 @@ export default defineNuxtConfig({
   modules: [
     "@pinia/nuxt",
     "pinia-plugin-persistedstate",
-    "@nuxt/eslint",
+    "@nuxtjs/eslint-module",
     "nuxtjs-naive-ui",
     "@vite-pwa/nuxt",
     "@nuxt/icon",
@@ -31,7 +31,8 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "nuxt-lodash",
     "@nuxtjs/i18n",
-  ].concat(siteConfig.platform === "cloudflare" ? "@nuxthub/core" : ""),
+    ...(siteConfig.platform === "cloudflare" ? ["@nuxthub/core"] : [])
+  ],
   // ssr
   ssr: false,
   // devtools
@@ -92,12 +93,12 @@ export default defineNuxtConfig({
     apiUrl: process.env.API_URL || "https://api.uptimerobot.com/v2/",
     apiKey: process.env.API_KEY,
     sitePassword: process.env.SITE_PASSWORD,
-    siteSecretKey: process.env.SITE_SECRE_KEY || "site-status",
+    siteSecretKey: process.env.SITE_SECRET_KEY || "site-status",
     public: siteConfig,
   },
   devServer: { port: 8566 },
   future: { compatibilityVersion: 4 },
-  compatibilityDate: "2024-11-11",
+  compatibilityDate: "2024-02-17",
   // vite
   vite: {
     plugins: [
